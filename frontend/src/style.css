@@ -1,0 +1,297 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background: #b5dce9;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.game-title,
+.controls,
+.star-counter,
+.bottom-message,
+.player-stats,
+.quest-panel,
+.garden-panel {
+  position: absolute;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  color: #42664a;
+}
+
+.game-title {
+  top: 25px;
+  left: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 18px;
+}
+
+.game-title span {
+  font-size: 32px;
+}
+
+.game-title h1 {
+  font-size: 21px;
+}
+
+.game-title p {
+  font-size: 12px;
+  color: #78927b;
+  margin-top: 3px;
+}
+
+.star-counter {
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 13px 23px;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.player-stats {
+  top: 90px;
+  left: 28px;
+  width: 220px;
+  padding: 14px;
+  border-radius: 15px;
+}
+
+.level-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.level-label strong {
+  font-size: 19px;
+}
+
+.xp-label {
+  margin-top: 8px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: #78927b;
+}
+
+.xp-track,
+.quest-track {
+  width: 100%;
+  height: 9px;
+  background: #e6eadf;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.xp-fill,
+.quest-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.xp-fill {
+  background: #91bd73;
+}
+
+.quest-panel {
+  top: 175px;
+  right: 28px;
+  width: 260px;
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.quest-panel h2,
+.garden-panel h2 {
+  font-size: 17px;
+}
+
+.quest-subtitle {
+  font-size: 11px;
+  color: #8b9c86;
+  margin: 5px 0 15px;
+}
+
+.quest-item {
+  padding: 12px 0;
+  border-top: 1px solid #e8ecdf;
+}
+
+.quest-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.quest-heading span {
+  color: #739c65;
+  font-weight: bold;
+}
+
+.quest-item p {
+  font-size: 11px;
+  color: #82917d;
+  margin: 7px 0;
+}
+
+.quest-fill {
+  background: #e8b66d;
+}
+
+.quest-item small {
+  display: block;
+  margin-top: 7px;
+  font-size: 10px;
+  color: #a18a5e;
+}
+
+.garden-panel {
+  left: 28px;
+  bottom: 85px;
+  width: 220px;
+  padding: 15px;
+  border-radius: 16px;
+}
+
+.garden-panel h2 {
+  margin-bottom: 12px;
+}
+
+.garden-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-top: 1px solid #e8ecdf;
+  font-size: 13px;
+}
+
+.garden-stat strong {
+  font-size: 16px;
+}
+
+.garden-panel > p {
+  margin-top: 10px;
+  font-size: 10px;
+  color: #78927b;
+  line-height: 1.5;
+}
+
+.controls {
+  top: 25px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 15px;
+  font-size: 13px;
+}
+
+.controls span {
+  background: #e5eddb;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.bottom-message {
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 13px 25px;
+  border-radius: 30px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .game-title {
+    top: 12px;
+    left: 12px;
+    padding: 10px;
+  }
+
+  .game-title h1 {
+    font-size: 16px;
+  }
+
+  .star-counter {
+    top: 85px;
+    left: 12px;
+    transform: none;
+    font-size: 16px;
+    padding: 9px 14px;
+  }
+
+  .player-stats {
+    top: 135px;
+    left: 12px;
+    width: 180px;
+  }
+
+  .quest-panel {
+    top: 200px;
+    right: 12px;
+    width: 210px;
+    padding: 12px;
+  }
+
+  .quest-panel h2,
+  .garden-panel h2 {
+    font-size: 14px;
+  }
+
+  .garden-panel {
+    left: 12px;
+    bottom: 65px;
+    width: 180px;
+    padding: 11px;
+  }
+
+  .controls {
+    top: 85px;
+    right: 12px;
+    padding: 9px;
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .controls span {
+    padding: 5px;
+    font-size: 9px;
+  }
+
+  .bottom-message {
+    bottom: 12px;
+    font-size: 11px;
+  }
+}

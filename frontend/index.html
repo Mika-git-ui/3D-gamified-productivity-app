@@ -1,0 +1,100 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Garden 🌷</title>
+</head>
+<body>
+  <div id="app">
+
+    <div class="game-title">
+      <span>🌷</span>
+      <div>
+        <h1>Little Garden</h1>
+        <p>Your little world of happiness</p>
+      </div>
+    </div>
+
+    <div class="player-stats">
+      <div class="level-label">
+        <span>🌱 Level</span>
+        <strong id="level-count">1</strong>
+      </div>
+
+      <div class="xp-label">
+        <span id="xp-count">0 / 100 XP</span>
+      </div>
+
+      <div class="xp-track">
+        <div id="xp-fill" class="xp-fill"></div>
+      </div>
+    </div>
+
+    <div class="star-counter">
+      ⭐ <span id="star-count">0</span>
+    </div>
+
+    <div class="quest-panel">
+      <h2>📜 Garden Quests</h2>
+      <p class="quest-subtitle">Little adventures await!</p>
+
+      <div class="quest-item">
+        <div class="quest-heading">
+          <strong>Little Explorer</strong>
+          <span id="quest-one-status">0/5</span>
+        </div>
+        <p>Collect 5 magical stars</p>
+        <div class="quest-track">
+          <div id="quest-one-fill" class="quest-fill"></div>
+        </div>
+        <small>🎁 Reward: 50 XP</small>
+      </div>
+
+      <div class="quest-item">
+        <div class="quest-heading">
+          <strong>Star Collector</strong>
+          <span id="quest-two-status">0/10</span>
+        </div>
+        <p>Collect 10 magical stars</p>
+        <div class="quest-track">
+          <div id="quest-two-fill" class="quest-fill"></div>
+        </div>
+        <small>🎁 Reward: 100 XP</small>
+      </div>
+    </div>
+
+    <div class="garden-panel">
+      <h2>🌻 My Garden</h2>
+
+      <div class="garden-stat">
+        <span>🌰 Seeds</span>
+        <strong id="seed-count">5</strong>
+      </div>
+
+      <div class="garden-stat">
+        <span>🌸 Harvested</span>
+        <strong id="harvest-count">0</strong>
+      </div>
+
+      <p id="plot-hint">
+        Find a plot and press E to interact.
+      </p>
+    </div>
+
+    <div class="controls">
+      <span>W A S D</span> Move
+      <span>SHIFT</span> Run
+      <span>E</span> Interact
+    </div>
+
+    <div id="game-message" class="bottom-message">
+      Welcome to your little garden 🌱
+    </div>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
