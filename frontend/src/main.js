@@ -85,7 +85,7 @@ sunlight.shadow.camera.bottom = -25;
 scene.add(sunlight);
 
 
-// ENVIRONMENT
+// WORLD
 createEnvironment(scene);
 
 
@@ -103,7 +103,19 @@ const gardenPlots = createGardenPlots(scene);
 
 // INVENTORY
 const inventory = {
-  seeds: 5,
+  seeds: {
+    daisy: 5,
+    tulip: 0,
+    sunflower: 0
+  },
+
+  selectedSeed: 'daisy',
+  unlocked: {
+    daisy: true,
+    tulip: false,
+    sunflower: false
+  },
+
   harvested: 0
 };
 
@@ -114,7 +126,6 @@ const levelCounter = document.querySelector('#level-count');
 const xpCounter = document.querySelector('#xp-count');
 const xpFill = document.querySelector('#xp-fill');
 
-const seedCounter = document.querySelector('#seed-count');
 const harvestCounter = document.querySelector('#harvest-count');
 
 const questOneStatus = document.querySelector('#quest-one-status');
@@ -126,8 +137,57 @@ const questTwoFill = document.querySelector('#quest-two-fill');
 const message = document.querySelector('#game-message');
 const plotHint = document.querySelector('#plot-hint');
 
+const seedButtons = document.querySelectorAll('.seed-button');
+
 let messageTimeout;
 let lastHint = '';
+
+
+// UNLOCK SEEDS
+function unlockSeeds(level) {
+  const unlocks = [
+    { type: 'tulip', level: 2 },
+    { type: 'sunflower', level: 3 }
+  ];
+
+  unlocks.forEach(item => {
+    if (
+      level >= item.level &&
+      !inventory.unlocked[item.type]
+    ) {
+      inventory.unlocked[item.type] = true;
+      inventory.seeds[item.type] = 3;
+
+      showMessage(
+        `🎉 New seeds unlocked: ${item.type}! You received 3 seeds.`
+      );
+    }
+  });
+}
+
+
+// REFRESH INVENTORY
+function refreshInventory() {
+  harvestCounter.textContent = inventory.harvested;
+
+  seedButtons.forEach(button => {
+    const type = button.dataset.seed;
+    const countElement = document.querySelector(`#${type}-count`);
+
+    const unlocked = inventory.unlocked[type];
+
+    button.disabled = !unlocked;
+    button.classList.toggle('locked', !unlocked);
+    button.classList.toggle(
+      'selected',
+      inventory.selectedSeed === type
+    );
+
+    countElement.textContent = unlocked
+      ? inventory.seeds[type]
+      : 'Locked';
+  });
+}
 
 
 // REFRESH PLAYER HUD
@@ -156,13 +216,9 @@ function refreshHUD(progress) {
 
   questTwoFill.style.width =
     `${(secondQuest.progress / secondQuest.target) * 100}%`;
-}
 
-
-// REFRESH INVENTORY HUD
-function refreshInventory() {
-  seedCounter.textContent = inventory.seeds;
-  harvestCounter.textContent = inventory.harvested;
+  unlockSeeds(progress.level);
+  refreshInventory();
 }
 
 
@@ -176,6 +232,22 @@ function showMessage(text) {
     message.textContent = 'Explore your little garden 🌱';
   }, 2500);
 }
+
+
+// SEED SELECTION
+seedButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const type = button.dataset.seed;
+
+    if (!inventory.unlocked[type]) return;
+
+    inventory.selectedSeed = type;
+
+    refreshInventory();
+
+    showMessage(`🌱 Selected ${type} seeds!`);
+  });
+});
 
 
 // COLLECT STAR
@@ -224,10 +296,9 @@ function handleGardenInteraction() {
 
 // INITIAL HUD
 refreshHUD(getProgress());
-refreshInventory();
 
 
-// KEYBOARD INPUT
+// INPUT
 const keys = {
   w: false,
   a: false,
@@ -236,7 +307,7 @@ const keys = {
   shift: false
 };
 
-window.addEventListener('keydown', (event) => {
+window.addEventListener('keydown', event => {
   const key = event.key.toLowerCase();
 
   if (key in keys) {
@@ -248,7 +319,7 @@ window.addEventListener('keydown', (event) => {
   }
 });
 
-window.addEventListener('keyup', (event) => {
+window.addEventListener('keyup', event => {
   const key = event.key.toLowerCase();
 
   if (key in keys) {
@@ -291,24 +362,23 @@ function animate() {
     delta
   );
 
-  // Show interaction hint when near a plot.
   const nearbyPlot = getNearestPlot(gardenPlots, player);
 
   let hint = 'Find a garden plot to plant a seed.';
 
   if (nearbyPlot) {
     if (nearbyPlot.state === 'empty') {
-      hint = 'Press E to plant a seed 🌱';
+      hint = `Press E to plant ${inventory.selectedSeed} seeds 🌱`;
+
+      if (inventory.seeds[inventory.selectedSeed] <= 0) {
+        hint = 'You need more seeds 🌰';
+      }
     } else if (nearbyPlot.state === 'planted') {
       hint = 'Press E to water your seed 💧';
     } else if (nearbyPlot.state === 'watered') {
       hint = 'Your flower is growing... 🌿';
     } else if (nearbyPlot.state === 'mature') {
       hint = 'Press E to harvest your flower 🌸';
-    }
-
-    if (nearbyPlot.state === 'empty' && inventory.seeds <= 0) {
-      hint = 'You need seeds to plant here 🌰';
     }
   }
 

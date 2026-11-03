@@ -175,7 +175,7 @@ canvas {
 .garden-panel {
   left: 28px;
   bottom: 85px;
-  width: 220px;
+  width: 230px;
   padding: 15px;
   border-radius: 16px;
 }
@@ -202,6 +202,49 @@ canvas {
   font-size: 10px;
   color: #78927b;
   line-height: 1.5;
+}
+
+.seed-options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.seed-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid #dce7d5;
+  border-radius: 10px;
+  padding: 9px 11px;
+  background: #f5f8f0;
+  color: #42664a;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.seed-button:hover:not(:disabled) {
+  background: #e7f0dc;
+}
+
+.seed-button.selected {
+  background: #e0efd4;
+  border-color: #86ad75;
+  box-shadow: 0 0 0 2px rgba(134, 173, 117, 0.15);
+}
+
+.seed-button span {
+  font-weight: bold;
+}
+
+.seed-button.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #eeeeea;
 }
 
 .controls {
@@ -265,16 +308,16 @@ canvas {
     padding: 12px;
   }
 
-  .quest-panel h2,
-  .garden-panel h2 {
-    font-size: 14px;
-  }
-
   .garden-panel {
     left: 12px;
     bottom: 65px;
-    width: 180px;
+    width: 190px;
     padding: 11px;
+  }
+
+  .quest-panel h2,
+  .garden-panel h2 {
+    font-size: 14px;
   }
 
   .controls {

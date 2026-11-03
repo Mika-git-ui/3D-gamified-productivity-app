@@ -69,13 +69,27 @@
       <h2>🌻 My Garden</h2>
 
       <div class="garden-stat">
-        <span>🌰 Seeds</span>
-        <strong id="seed-count">5</strong>
-      </div>
-
-      <div class="garden-stat">
         <span>🌸 Harvested</span>
         <strong id="harvest-count">0</strong>
+      </div>
+
+      <p>Choose a seed to plant:</p>
+
+      <div class="seed-options">
+        <button class="seed-button selected" data-seed="daisy">
+          🌼 Daisy
+          <span id="daisy-count">5</span>
+        </button>
+
+        <button class="seed-button locked" data-seed="tulip" disabled>
+          🌷 Tulip
+          <span id="tulip-count">Locked</span>
+        </button>
+
+        <button class="seed-button locked" data-seed="sunflower" disabled>
+          🌻 Sunflower
+          <span id="sunflower-count">Locked</span>
+        </button>
       </div>
 
       <p id="plot-hint">
